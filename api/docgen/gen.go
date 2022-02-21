@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/api/parser"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/api/parser"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 // DocCommand generate Markdown doc file

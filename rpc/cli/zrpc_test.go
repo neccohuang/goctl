@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/zeromicro/go-zero/tools/goctl/util/console"
+	"github.com/neccohuang/goctl/util/console"
 )
 
 type test struct {

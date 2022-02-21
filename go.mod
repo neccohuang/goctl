@@ -1,4 +1,4 @@
-module github.com/zeromicro/go-zero/tools/goctl
+module github.com/neccohuang/goctl
 
 go 1.15
 

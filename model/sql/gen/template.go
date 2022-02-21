@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/template"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/model/sql/template"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 const (

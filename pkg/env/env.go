@@ -8,12 +8,12 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/zeromicro/go-zero/tools/goctl/internal/version"
-	sortedmap "github.com/zeromicro/go-zero/tools/goctl/pkg/collection"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protoc"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protocgengo"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protocgengogrpc"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/internal/version"
+	sortedmap "github.com/neccohuang/goctl/pkg/collection"
+	"github.com/neccohuang/goctl/pkg/protoc"
+	"github.com/neccohuang/goctl/pkg/protocgengo"
+	"github.com/neccohuang/goctl/pkg/protocgengogrpc"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 var goctlEnv *sortedmap.SortedMap

@@ -40,7 +40,7 @@ goctl model 为go-zero下的工具模块中的组件之一，目前支持识别m
     	"github.com/zeromicro/go-zero/core/stores/sqlc"
     	"github.com/zeromicro/go-zero/core/stores/sqlx"
     	"github.com/zeromicro/go-zero/core/stringx"
-    	"github.com/zeromicro/go-zero/tools/goctl/model/sql/builderx"
+    	"github.com/neccohuang/goctl/model/sql/builderx"
     )
     
     var (

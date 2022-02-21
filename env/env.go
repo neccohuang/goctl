@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/env"
+	"github.com/neccohuang/goctl/pkg/env"
 )
 
 func Action(c *cli.Context) error {

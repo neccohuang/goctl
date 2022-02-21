@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/stringx"
-	conf "github.com/zeromicro/go-zero/tools/goctl/config"
-	"github.com/zeromicro/go-zero/tools/goctl/rpc/execx"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	conf "github.com/neccohuang/goctl/config"
+	"github.com/neccohuang/goctl/rpc/execx"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 var cfg = &conf.Config{

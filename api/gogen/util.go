@@ -10,10 +10,10 @@ import (
 	"text/template"
 
 	"github.com/zeromicro/go-zero/core/collection"
-	"github.com/zeromicro/go-zero/tools/goctl/api/spec"
-	"github.com/zeromicro/go-zero/tools/goctl/api/util"
-	"github.com/zeromicro/go-zero/tools/goctl/util/ctx"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/api/spec"
+	"github.com/neccohuang/goctl/api/util"
+	"github.com/neccohuang/goctl/util/ctx"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 type fileGenConfig struct {

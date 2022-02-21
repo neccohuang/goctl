@@ -1,9 +1,9 @@
 package gen
 
 import (
-	"github.com/zeromicro/go-zero/tools/goctl/model/sql/template"
-	"github.com/zeromicro/go-zero/tools/goctl/util"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/model/sql/template"
+	"github.com/neccohuang/goctl/util"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 func genImports(withCache, timeImport bool, table Table) (string, error) {

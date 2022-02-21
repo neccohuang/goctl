@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	conf "github.com/zeromicro/go-zero/tools/goctl/config"
-	"github.com/zeromicro/go-zero/tools/goctl/rpc/parser"
-	"github.com/zeromicro/go-zero/tools/goctl/util/format"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	conf "github.com/neccohuang/goctl/config"
+	"github.com/neccohuang/goctl/rpc/parser"
+	"github.com/neccohuang/goctl/util/format"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 const configTemplate = `package config

@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stringx"
-	"github.com/zeromicro/go-zero/tools/goctl/api/gogen"
-	"github.com/zeromicro/go-zero/tools/goctl/api/spec"
-	"github.com/zeromicro/go-zero/tools/goctl/api/util"
+	"github.com/neccohuang/goctl/api/gogen"
+	"github.com/neccohuang/goctl/api/spec"
+	"github.com/neccohuang/goctl/api/util"
 )
 
 const (

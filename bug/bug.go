@@ -7,7 +7,7 @@ import (
 	"runtime"
 
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/internal/version"
+	"github.com/neccohuang/goctl/internal/version"
 )
 
 const (

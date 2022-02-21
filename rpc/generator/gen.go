@@ -3,11 +3,11 @@ package generator
 import (
 	"path/filepath"
 
-	conf "github.com/zeromicro/go-zero/tools/goctl/config"
-	"github.com/zeromicro/go-zero/tools/goctl/rpc/parser"
-	"github.com/zeromicro/go-zero/tools/goctl/util/console"
-	"github.com/zeromicro/go-zero/tools/goctl/util/ctx"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	conf "github.com/neccohuang/goctl/config"
+	"github.com/neccohuang/goctl/rpc/parser"
+	"github.com/neccohuang/goctl/util/console"
+	"github.com/neccohuang/goctl/util/ctx"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 // RPCGenerator defines a generator and configure

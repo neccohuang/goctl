@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/zeromicro/antlr"
-	"github.com/zeromicro/go-zero/tools/goctl/api/parser/g4/gen/api"
-	"github.com/zeromicro/go-zero/tools/goctl/util/console"
+	"github.com/neccohuang/goctl/api/parser/g4/gen/api"
+	"github.com/neccohuang/goctl/util/console"
 )
 
 type (

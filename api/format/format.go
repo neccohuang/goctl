@@ -13,9 +13,9 @@ import (
 
 	"github.com/urfave/cli"
 	"github.com/zeromicro/go-zero/core/errorx"
-	"github.com/zeromicro/go-zero/tools/goctl/api/parser"
-	"github.com/zeromicro/go-zero/tools/goctl/api/util"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	"github.com/neccohuang/goctl/api/parser"
+	"github.com/neccohuang/goctl/api/util"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 const (

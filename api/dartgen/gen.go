@@ -6,7 +6,7 @@ import (
 
 	"github.com/urfave/cli"
 	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zeromicro/go-zero/tools/goctl/api/parser"
+	"github.com/neccohuang/goctl/api/parser"
 )
 
 // DartCommand create dart network request code

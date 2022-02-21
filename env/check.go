@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/env"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protoc"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protocgengo"
-	"github.com/zeromicro/go-zero/tools/goctl/pkg/protocgengogrpc"
-	"github.com/zeromicro/go-zero/tools/goctl/util/console"
+	"github.com/neccohuang/goctl/pkg/env"
+	"github.com/neccohuang/goctl/pkg/protoc"
+	"github.com/neccohuang/goctl/pkg/protocgengo"
+	"github.com/neccohuang/goctl/pkg/protocgengogrpc"
+	"github.com/neccohuang/goctl/util/console"
 )
 
 type bin struct {

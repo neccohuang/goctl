@@ -17,9 +17,9 @@ import (
 
 	"github.com/logrusorgru/aurora"
 	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/tools/goctl/util/console"
-	"github.com/zeromicro/go-zero/tools/goctl/util/ctx"
-	"github.com/zeromicro/go-zero/tools/goctl/vars"
+	"github.com/neccohuang/goctl/util/console"
+	"github.com/neccohuang/goctl/util/ctx"
+	"github.com/neccohuang/goctl/vars"
 )
 
 const zeromicroVersion = "v1.3.0"

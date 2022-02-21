@@ -14,12 +14,12 @@ import (
 	"github.com/logrusorgru/aurora"
 	"github.com/urfave/cli"
 	"github.com/zeromicro/go-zero/core/logx"
-	apiformat "github.com/zeromicro/go-zero/tools/goctl/api/format"
-	"github.com/zeromicro/go-zero/tools/goctl/api/parser"
-	apiutil "github.com/zeromicro/go-zero/tools/goctl/api/util"
-	"github.com/zeromicro/go-zero/tools/goctl/config"
-	"github.com/zeromicro/go-zero/tools/goctl/util"
-	"github.com/zeromicro/go-zero/tools/goctl/util/pathx"
+	apiformat "github.com/neccohuang/goctl/api/format"
+	"github.com/neccohuang/goctl/api/parser"
+	apiutil "github.com/neccohuang/goctl/api/util"
+	"github.com/neccohuang/goctl/config"
+	"github.com/neccohuang/goctl/util"
+	"github.com/neccohuang/goctl/util/pathx"
 )
 
 const tmpFile = "%s-%d"

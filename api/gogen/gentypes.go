@@ -7,11 +7,11 @@ import (
 	"path"
 	"strings"
 
-	"github.com/zeromicro/go-zero/tools/goctl/api/spec"
-	apiutil "github.com/zeromicro/go-zero/tools/goctl/api/util"
-	"github.com/zeromicro/go-zero/tools/goctl/config"
-	"github.com/zeromicro/go-zero/tools/goctl/util"
-	"github.com/zeromicro/go-zero/tools/goctl/util/format"
+	"github.com/neccohuang/goctl/api/spec"
+	apiutil "github.com/neccohuang/goctl/api/util"
+	"github.com/neccohuang/goctl/config"
+	"github.com/neccohuang/goctl/util"
+	"github.com/neccohuang/goctl/util/format"
 )
 
 const (
