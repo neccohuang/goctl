@@ -54,7 +54,9 @@ func GoCommand(c *cli.Context) error {
 
 	if c.String("common") != "" {
 		params["commonPath"] = c.String("common")
+	}
 
+	if len(params) > 0 {
 		return DoGenProject(apiFile, dir, namingStyle, params)
 	}
 
