@@ -6,9 +6,6 @@ import (
 	"runtime"
 
 	"github.com/logrusorgru/aurora"
-	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/core/load"
-	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/neccohuang/goctl/api/apigen"
 	"github.com/neccohuang/goctl/api/dartgen"
 	"github.com/neccohuang/goctl/api/docgen"
@@ -33,6 +30,9 @@ import (
 	rpc "github.com/neccohuang/goctl/rpc/cli"
 	"github.com/neccohuang/goctl/tpl"
 	"github.com/neccohuang/goctl/upgrade"
+	"github.com/urfave/cli"
+	"github.com/zeromicro/go-zero/core/load"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 const codeFailure = 1
@@ -194,8 +194,8 @@ var commands = []cli.Command{
 						Usage: "the api file",
 					},
 					cli.StringFlag{
-						Name:  "root",
-						Usage: "the project root path",
+						Name:  "common",
+						Usage: "the project common path",
 					},
 					cli.StringFlag{
 						Name:  "style",

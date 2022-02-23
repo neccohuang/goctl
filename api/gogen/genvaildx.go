@@ -68,24 +68,23 @@ func checkLength(fl validator.FieldLevel) bool {
 }
 `
 
-func genVaildx(rootPkg string,params map[string]interface{}) error {
+func genVaildx(rootPkg string, params map[string]interface{}) error {
 
-	var rootPath string
-	if _,ok:= params["rootPath"]; !ok || params["rootPath"]==""{
-		rootPath = "../"
-	}else {
-		rootPath = fmt.Sprintf("%s", params["rootPath"])
+	var commonPath string
+	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
+		commonPath = "../"
+	} else {
+		commonPath = fmt.Sprintf("%s", params["commonPath"])
 	}
 
 	return genFile(fileGenConfig{
-		dir:            rootPath,
+		dir:             commonPath,
 		subdir:          "/common/vaildx",
 		filename:        "vaildx.go",
 		templateName:    "vaildxTemplate",
 		category:        category,
 		templateFile:    "vaildx.tpl",
 		builtinTemplate: vaildxTemplate,
-		data: map[string]interface{}{
-		},
+		data:            map[string]interface{}{},
 	})
 }

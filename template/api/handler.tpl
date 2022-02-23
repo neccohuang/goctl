@@ -2,8 +2,8 @@ package {{.PkgName}}
 
 import (
 	"net/http"
-	"{{.RootPath}}/common/vaildx"
-    "{{.RootPath}}/common/responsex"
+	"{{.CommonPath}}/common/vaildx"
+    "{{.CommonPath}}/common/responsex"
     "encoding/json"
 	{{if .After1_1_10}}"github.com/zeromicro/go-zero/rest/httpx"{{end}}
     "go.opentelemetry.io/otel/attribute"

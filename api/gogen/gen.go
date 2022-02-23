@@ -12,14 +12,14 @@ import (
 	"time"
 
 	"github.com/logrusorgru/aurora"
-	"github.com/urfave/cli"
-	"github.com/zeromicro/go-zero/core/logx"
 	apiformat "github.com/neccohuang/goctl/api/format"
 	"github.com/neccohuang/goctl/api/parser"
 	apiutil "github.com/neccohuang/goctl/api/util"
 	"github.com/neccohuang/goctl/config"
 	"github.com/neccohuang/goctl/util"
 	"github.com/neccohuang/goctl/util/pathx"
+	"github.com/urfave/cli"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 const tmpFile = "%s-%d"
@@ -50,8 +50,10 @@ func GoCommand(c *cli.Context) error {
 		return errors.New("missing -dir")
 	}
 
-	params := map[string]interface{}{
-		"rootPath": c.String("root"),
+	params := make(map[string]interface{})
+
+	if c.String("common") != "" {
+		params["commonPath"] = c.String("common")
 	}
 
 	return DoGenProject(apiFile, dir, namingStyle, params)
@@ -84,10 +86,13 @@ func DoGenProject(apiFile, dir, style string, i ...interface{}) error {
 	logx.Must(genHandlers(dir, rootPkg, cfg, api))
 	logx.Must(genLogic(dir, rootPkg, cfg, api))
 	logx.Must(genMiddleware(dir, cfg, api))
-	logx.Must(genErrorz(rootPkg, i[0].(map[string]interface{})))
-	logx.Must(genVaildx(rootPkg, i[0].(map[string]interface{})))
-	logx.Must(genState(rootPkg, i[0].(map[string]interface{})))
-	logx.Must(genResponse(rootPkg, i[0].(map[string]interface{})))
+
+	if len(i) > 0 {
+		logx.Must(genErrorz(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genVaildx(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genState(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genResponse(rootPkg, i[0].(map[string]interface{})))
+	}
 
 	if err := backupAndSweep(apiFile); err != nil {
 		return err

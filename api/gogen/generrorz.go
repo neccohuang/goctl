@@ -33,15 +33,15 @@ func (e *Err) GetMessage() string {
 
 func genErrorz(rootPkg string, params map[string]interface{}) error {
 
-	var rootPath string
-	if _, ok := params["rootPath"]; !ok || params["rootPath"] == "" {
-		rootPath = "../"
+	var commonPath string
+	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
+		commonPath = "../"
 	} else {
-		rootPath = fmt.Sprintf("%s", params["rootPath"])
+		commonPath = fmt.Sprintf("%s", params["commonPath"])
 	}
 
 	return genFile(fileGenConfig{
-		dir:             rootPath,
+		dir:             commonPath,
 		subdir:          "/common/errorz",
 		filename:        "errorz.go",
 		templateName:    "errorzTemplate",

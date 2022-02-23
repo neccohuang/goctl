@@ -60,12 +60,12 @@ func FindGoModPath(dir string) (string, bool) {
 	}
 
 	absDir = strings.ReplaceAll(absDir, `\`, `/`)
-	var rootPath string
+	var commonPath string
 	tempPath := absDir
 	hasGoMod := false
 	for {
 		if FileExists(filepath.Join(tempPath, goModeIdentifier)) {
-			rootPath = strings.TrimPrefix(absDir[len(tempPath):], "/")
+			commonPath = strings.TrimPrefix(absDir[len(tempPath):], "/")
 			hasGoMod = true
 			break
 		}
@@ -80,7 +80,7 @@ func FindGoModPath(dir string) (string, bool) {
 		}
 	}
 	if hasGoMod {
-		return rootPath, true
+		return commonPath, true
 	}
 	return "", false
 }

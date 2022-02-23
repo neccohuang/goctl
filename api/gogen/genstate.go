@@ -13,24 +13,23 @@ var (
 )
 `
 
-func genState(rootPkg string,params map[string]interface{}) error {
+func genState(rootPkg string, params map[string]interface{}) error {
 
-	var rootPath string
-	if _,ok:= params["rootPath"]; !ok || params["rootPath"]==""{
-		rootPath = "../"
-	}else {
-		rootPath = fmt.Sprintf("%s", params["rootPath"])
+	var commonPath string
+	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
+		commonPath = "../"
+	} else {
+		commonPath = fmt.Sprintf("%s", params["commonPath"])
 	}
 
 	return genFile(fileGenConfig{
-		dir:             rootPath,
+		dir:             commonPath,
 		subdir:          "/common/responsex",
 		filename:        "state.go",
 		templateName:    "stateTemplate",
 		category:        category,
 		templateFile:    "state.tpl",
 		builtinTemplate: stateTemplate,
-		data: map[string]interface{}{
-		},
+		data:            map[string]interface{}{},
 	})
 }

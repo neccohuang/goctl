@@ -46,7 +46,7 @@ func {{.HandlerName}}(svcCtx *svc.ServiceContext) http.HandlerFunc {
 )
 
 type handlerInfo struct {
-	RootPath       string
+	CommonPath     string
 	PkgName        string
 	ImportPackages string
 	HandlerName    string
@@ -79,7 +79,7 @@ func genHandler(dir, rootPkg string, cfg *config.Config, group spec.Group, route
 	// todo(anqiansong): This will be removed after a certain number of production versions of goctl (probably 5)
 	after1_1_10 := version.IsVersionGreaterThan(goctlVersion, "1.1.10")
 	return doGenToFile(dir, handler, cfg, group, route, handlerInfo{
-		RootPath : path[0],
+		CommonPath:     path[0],
 		PkgName:        pkgName,
 		ImportPackages: genHandlerImports(group, route, parentPkg),
 		HandlerName:    handler,

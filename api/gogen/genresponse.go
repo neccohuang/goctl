@@ -13,7 +13,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/gioco-play/easy-i18n/i18n"
+	"github.com/neccohuang/easy-i18n/i18n"
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
@@ -63,15 +63,15 @@ func genResponse(rootPkg string, params map[string]interface{}) error {
 
 	path := strings.Split(rootPkg, "/")
 
-	var rootPath string
-	if _, ok := params["rootPath"]; !ok || params["rootPath"] == "" {
-		rootPath = "../"
+	var commonPath string
+	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
+		commonPath = "../"
 	} else {
-		rootPath = fmt.Sprintf("%s", params["rootPath"])
+		commonPath = fmt.Sprintf("%s", params["commonPath"])
 	}
 
 	return genFile(fileGenConfig{
-		dir:             rootPath,
+		dir:             commonPath,
 		subdir:          "/common/responsex",
 		filename:        "responsex.go",
 		templateName:    "responseTemplate",
