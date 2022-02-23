@@ -22,33 +22,32 @@ func New(code string, msgs ...string) error {
 }
 
 func (e *Err) Error() string {
-	return e.code
+	return e.message
 }
 
-func (e *Err) GetMessage() string {
-	return e.message
+func (e *Err) GetCode() string {
+	return e.code
 }
 
 `
 
-func genErrorz(rootPkg string,params map[string]interface{}) error {
+func genErrorz(rootPkg string, params map[string]interface{}) error {
 
 	var rootPath string
-	if _,ok:= params["rootPath"]; !ok || params["rootPath"]==""{
+	if _, ok := params["rootPath"]; !ok || params["rootPath"] == "" {
 		rootPath = "../"
-	}else {
+	} else {
 		rootPath = fmt.Sprintf("%s", params["rootPath"])
 	}
 
 	return genFile(fileGenConfig{
-		dir:            rootPath,
+		dir:             rootPath,
 		subdir:          "/common/errorz",
 		filename:        "errorz.go",
 		templateName:    "errorzTemplate",
 		category:        category,
 		templateFile:    "errorz.tpl",
 		builtinTemplate: errorzTemplate,
-		data: map[string]interface{}{
-		},
+		data:            map[string]interface{}{},
 	})
 }

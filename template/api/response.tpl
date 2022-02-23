@@ -31,10 +31,10 @@ func Json(w http.ResponseWriter, r *http.Request, code string, resp interface{},
 	body.Code = code
 	body.Message = i18n.Sprintf(code)
 	if err != nil {
-		if v, ok := err.(*errorz.Err); ok && v.GetMessage() != "" {
-			span.RecordError(errors.New(fmt.Sprintf("(%s)%s", code, v.GetMessage())))
+		if v, ok := err.(*errorz.Err); ok && v.Error() != "" {
+			span.RecordError(errors.New(fmt.Sprintf("(%s)%s", code, v.Error())))
 		} else {
-			span.RecordError(errors.New(fmt.Sprintf("(%s)%s %s", code, body.Message, err.Error())))
+			span.RecordError(errors.New(fmt.Sprintf("(%s)%s %s", code, body.Message, err.GetCode())))
 		}
 	} else {
 		body.Data = resp
