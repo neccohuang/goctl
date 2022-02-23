@@ -92,7 +92,7 @@ func DoGenProject(apiFile, dir, style string, i ...interface{}) error {
 	logx.Must(genMiddleware(dir, cfg, api))
 
 	if len(i) > 0 {
-		logx.Must(genErrorz(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genErrorx(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genVaildx(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genState(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genResponse(rootPkg, i[0].(map[string]interface{})))

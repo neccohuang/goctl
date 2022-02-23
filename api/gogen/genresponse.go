@@ -8,7 +8,7 @@ import (
 const responseTemplate = `package responsex
 
 import (
-	{{.errorz}}
+	{{.errorx}}
 	{{.locales}}
 	"encoding/json"
 	"errors"
@@ -38,7 +38,7 @@ func Json(w http.ResponseWriter, r *http.Request, code string, resp interface{},
 	body.Code = code
 	body.Message = i18n.Sprintf(code)
 	if err != nil {
-		if v, ok := err.(*errorz.Err); ok && v.GetMessage() != "" {
+		if v, ok := err.(*errorx.Err); ok && v.GetMessage() != "" {
 		    span.RecordError(errors.New(fmt.Sprintf("(%s)%s", code, v.GetMessage())))
 		} else {
             span.RecordError(errors.New(fmt.Sprintf("(%s)%s %s", code, body.Message, err.Error())))
@@ -79,7 +79,7 @@ func genResponse(rootPkg string, params map[string]interface{}) error {
 		templateFile:    "response.tpl",
 		builtinTemplate: responseTemplate,
 		data: map[string]interface{}{
-			"errorz":  fmt.Sprintf(`"%s/common/errorz"`, path[0]),
+			"errorx":  fmt.Sprintf(`"%s/common/errorx"`, path[0]),
 			"locales": fmt.Sprintf(`_ "%s/locales"`, path[0]),
 		},
 	})

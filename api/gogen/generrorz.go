@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const errorzTemplate = `package errorz
+const errorxTemplate = `package errorx
 
 type Err struct {
 	code    string
@@ -31,7 +31,7 @@ func (e *Err) GetMessage() string {
 
 `
 
-func genErrorz(rootPkg string, params map[string]interface{}) error {
+func genErrorx(rootPkg string, params map[string]interface{}) error {
 
 	var commonPath string
 	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
@@ -42,12 +42,12 @@ func genErrorz(rootPkg string, params map[string]interface{}) error {
 
 	return genFile(fileGenConfig{
 		dir:             commonPath,
-		subdir:          "/common/errorz",
-		filename:        "errorz.go",
-		templateName:    "errorzTemplate",
+		subdir:          "/common/errorx",
+		filename:        "errorx.go",
+		templateName:    "errorxTemplate",
 		category:        category,
-		templateFile:    "errorz.tpl",
-		builtinTemplate: errorzTemplate,
+		templateFile:    "errorx.tpl",
+		builtinTemplate: errorxTemplate,
 		data:            map[string]interface{}{},
 	})
 }

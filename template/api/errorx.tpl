@@ -1,4 +1,4 @@
-package errorz
+package errorx
 
 type Err struct {
 	code    string
