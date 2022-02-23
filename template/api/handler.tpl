@@ -38,7 +38,7 @@ func {{.HandlerName}}(ctx *svc.ServiceContext) http.HandlerFunc {
 		{{end}}l := {{.LogicName}}.New{{.LogicType}}(r.Context(), ctx)
 		{{if .HasResp}}resp, {{end}}err := l.{{.Call}}({{if .HasRequest}}&req{{end}})
 		if err != nil {
-			responsex.Json(w, r, err.GetCode(), nil, err)
+			responsex.Json(w, r, err.Error(), nil, err)
 		} else {
 			{{if .HasResp}}responsex.Json(w, r, responsex.SUCCESS, resp, err){{else}}responsex.Json(w, r, responsex.SUCCESS, nil, err){{end}}
 		}

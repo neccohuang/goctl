@@ -22,11 +22,11 @@ func New(code string, msgs ...string) error {
 }
 
 func (e *Err) Error() string {
-	return e.message
+	return e.code
 }
 
-func (e *Err) GetCode() string {
-	return e.code
+func (e *Err) GetMessage() string {
+	return e.message
 }
 
 `
