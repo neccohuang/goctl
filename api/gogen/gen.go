@@ -96,6 +96,7 @@ func DoGenProject(apiFile, dir, style string, i ...interface{}) error {
 		logx.Must(genVaildx(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genState(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genResponse(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genMakefile(rootPkg, cfg, api, i[0].(map[string]interface{})))
 	}
 
 	if err := backupAndSweep(apiFile); err != nil {
