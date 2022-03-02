@@ -81,13 +81,15 @@ func DoGenProject(apiFile, dir, style string, i ...interface{}) error {
 		return err
 	}
 
+	modeName := strings.Split(rootPkg, "/"+api.Service.Name)
+
 	logx.Must(genEtc(dir, cfg, api))
 	logx.Must(genConfig(dir, cfg, api))
 	logx.Must(genMain(dir, rootPkg, cfg, api))
 	logx.Must(genServiceContext(dir, rootPkg, cfg, api))
 	logx.Must(genTypes(dir, cfg, api))
 	logx.Must(genRoutes(dir, rootPkg, cfg, api))
-	logx.Must(genHandlers(dir, rootPkg, cfg, api))
+	logx.Must(genHandlers(dir, modeName[0], cfg, api))
 	logx.Must(genLogic(dir, rootPkg, cfg, api))
 	logx.Must(genMiddleware(dir, cfg, api))
 
@@ -95,7 +97,7 @@ func DoGenProject(apiFile, dir, style string, i ...interface{}) error {
 		logx.Must(genErrorx(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genVaildx(rootPkg, i[0].(map[string]interface{})))
 		logx.Must(genState(rootPkg, i[0].(map[string]interface{})))
-		logx.Must(genResponse(rootPkg, i[0].(map[string]interface{})))
+		logx.Must(genResponse(modeName[0], i[0].(map[string]interface{})))
 		logx.Must(genMakefile(rootPkg, cfg, api, i[0].(map[string]interface{})))
 	}
 

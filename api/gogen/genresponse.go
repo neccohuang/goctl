@@ -2,7 +2,6 @@ package gogen
 
 import (
 	"fmt"
-	"strings"
 )
 
 const responseTemplate = `package responsex
@@ -61,8 +60,6 @@ func Json(w http.ResponseWriter, r *http.Request, code string, resp interface{},
 
 func genResponse(rootPkg string, params map[string]interface{}) error {
 
-	path := strings.Split(rootPkg, "/")
-
 	var commonPath string
 	if _, ok := params["commonPath"]; !ok || params["commonPath"] == "" {
 		commonPath = "../"
@@ -79,8 +76,8 @@ func genResponse(rootPkg string, params map[string]interface{}) error {
 		templateFile:    "response.tpl",
 		builtinTemplate: responseTemplate,
 		data: map[string]interface{}{
-			"errorx":  fmt.Sprintf(`"%s/common/errorx"`, path[0]),
-			"locales": fmt.Sprintf(`_ "%s/locales"`, path[0]),
+			"errorx":  fmt.Sprintf(`"%s/common/errorx"`, rootPkg),
+			"locales": fmt.Sprintf(`_ "%s/locales"`, rootPkg),
 		},
 	})
 }

@@ -73,13 +73,11 @@ func genHandler(dir, rootPkg string, cfg *config.Config, group spec.Group, route
 		return err
 	}
 
-	path := strings.Split(rootPkg, "/")
-
 	goctlVersion := version.GetGoctlVersion()
 	// todo(anqiansong): This will be removed after a certain number of production versions of goctl (probably 5)
 	after1_1_10 := version.IsVersionGreaterThan(goctlVersion, "1.1.10")
 	return doGenToFile(dir, handler, cfg, group, route, handlerInfo{
-		CommonPath:     path[0],
+		CommonPath:     rootPkg,
 		PkgName:        pkgName,
 		ImportPackages: genHandlerImports(group, route, parentPkg),
 		HandlerName:    handler,
