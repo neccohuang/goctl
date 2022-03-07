@@ -19,7 +19,7 @@ ListenOn: 127.0.0.1:8080
 Consul:
   Host: 127.0.0.1:8500
   Key: {{.serviceName}}.rpc
-  Check: grpc
+  Check: {{if .check}}grpc{{else}}ttl{{end}}
   Meta:
     Protocol: grpc
   Tag:
@@ -48,8 +48,14 @@ func (g *DefaultGenerator) GenEtc(ctx DirContext, _ parser.Proto, cfg *conf.Conf
 		return err
 	}
 
+	var check string
+	if consul == "grpc" {
+		check = "grpc"
+	}
+
 	return util.With("etc").Parse(text).SaveTo(map[string]interface{}{
 		"serviceName": strings.ToLower(stringx.From(ctx.GetServiceName().Source()).ToCamel()),
 		"consul":      consul,
+		"check":       check,
 	}, fileName, false)
 }
