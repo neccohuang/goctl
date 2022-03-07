@@ -18,9 +18,13 @@ const mainTemplate = `package main
 import (
 	"flag"
 	"fmt"
+ 	{{if .consul}}"github.com/neccoys/go-zero-extension/consul"{{end}}
+    {{if .check}}"google.golang.org/grpc/health/grpc_health_v1"{{end}}
+	"log"
 
 	{{.imports}}
 
+	"github.com/joho/godotenv"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -28,18 +32,25 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "etc/{{.serviceName}}.yaml", "the config file")
+var (
+    configFile = flag.String("f", "etc/{{.serviceName}}.yaml", "the config file")
+    envFile    = flag.String("env", "etc/.env", "the env file")
+)
 
 func main() {
 	flag.Parse()
+	if err := godotenv.Load(*envFile); err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	var c config.Config
-	conf.MustLoad(*configFile, &c)
+	conf.MustLoad(*configFile, &c, conf.UseEnv())
 	ctx := svc.NewServiceContext(c)
 	srv := server.New{{.serviceNew}}Server(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		{{.pkg}}.Register{{.service}}Server(grpcServer, srv)
+		{{if .check}}grpc_health_v1.RegisterHealthServer(grpcServer, srv){{end}}
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
@@ -47,13 +58,20 @@ func main() {
 	})
 	defer s.Stop()
 
+	{{if .consul}}
+	// 注册Consul服务
+    if err := consul.RegisterService(c.ListenOn, c.Consul); err != nil {
+        log.Println("Consul Error:", err)
+    }
+    {{end}}
+
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 	s.Start()
 }
 `
 
 // GenMain generates the main file of the rpc service, which is an rpc service program call entry
-func (g *DefaultGenerator) GenMain(ctx DirContext, proto parser.Proto, cfg *conf.Config) error {
+func (g *DefaultGenerator) GenMain(ctx DirContext, proto parser.Proto, cfg *conf.Config, consul string) error {
 	mainFilename, err := format.FileNamingFormat(cfg.NamingFormat, ctx.GetServiceName().Source())
 	if err != nil {
 		return err
@@ -76,9 +94,16 @@ func (g *DefaultGenerator) GenMain(ctx DirContext, proto parser.Proto, cfg *conf
 		return err
 	}
 
+	var check string
+	if consul == "grpc" {
+		check = "grpc"
+	}
+
 	return util.With("main").GoFmt(true).Parse(text).SaveTo(map[string]interface{}{
 		"serviceName": etcFileName,
 		"imports":     strings.Join(imports, pathx.NL),
+		"consul":      consul,
+		"check":       check,
 		"pkg":         proto.PbPackage,
 		"serviceNew":  stringx.From(proto.Service.Name).ToCamel(),
 		"service":     parser.CamelCase(proto.Service.Name),

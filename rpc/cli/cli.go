@@ -6,12 +6,12 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/urfave/cli"
 	"github.com/neccohuang/goctl/rpc/generator"
 	"github.com/neccohuang/goctl/util"
 	"github.com/neccohuang/goctl/util/console"
 	"github.com/neccohuang/goctl/util/env"
 	"github.com/neccohuang/goctl/util/pathx"
+	"github.com/urfave/cli"
 )
 
 // Deprecated: use ZRPC instead.
@@ -28,6 +28,7 @@ func RPC(c *cli.Context) error {
 
 	src := c.String("src")
 	out := c.String("dir")
+	consul := c.String("consul")
 	style := c.String("style")
 	protoImportPath := c.StringSlice("proto_path")
 	goOptions := c.StringSlice("go_opt")
@@ -56,7 +57,7 @@ func RPC(c *cli.Context) error {
 		return err
 	}
 
-	return g.Generate(src, out, protoImportPath, goOptions...)
+	return g.Generate(src, out, consul, protoImportPath, goOptions...)
 }
 
 func prepare() error {
@@ -86,6 +87,7 @@ func RPCNew(c *cli.Context) error {
 	if len(ext) > 0 {
 		return fmt.Errorf("unexpected ext: %s", ext)
 	}
+	check := c.String("check")
 	style := c.String("style")
 	home := c.String("home")
 	remote := c.String("remote")
@@ -116,7 +118,7 @@ func RPCNew(c *cli.Context) error {
 		return err
 	}
 
-	return g.Generate(src, filepath.Dir(src), nil)
+	return g.Generate(src, filepath.Dir(src), check, nil)
 }
 
 // RPCTemplate is the entry for generate rpc template

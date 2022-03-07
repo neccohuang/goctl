@@ -8,10 +8,10 @@ import (
 	"strings"
 
 	"github.com/emicklei/proto"
-	"github.com/urfave/cli"
 	"github.com/neccohuang/goctl/rpc/generator"
 	"github.com/neccohuang/goctl/util"
 	"github.com/neccohuang/goctl/util/pathx"
+	"github.com/urfave/cli"
 )
 
 var (
@@ -52,6 +52,7 @@ func ZRPC(c *cli.Context) error {
 	grpcOpt := c.String("go-grpc_opt")
 	zrpcOut := c.String("zrpc_out")
 	style := c.String("style")
+	consul := c.String("consul")
 	home := c.String("home")
 	remote := c.String("remote")
 	if len(remote) > 0 {
@@ -133,7 +134,7 @@ func ZRPC(c *cli.Context) error {
 		return err
 	}
 
-	return g.Generate(source, zrpcOut, nil)
+	return g.Generate(source, zrpcOut, consul, nil)
 }
 
 // parseOut calculates the output place to grpc code, about to calculate logic for details

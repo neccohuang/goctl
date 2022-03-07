@@ -5,13 +5,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/zeromicro/go-zero/core/collection"
 	conf "github.com/neccohuang/goctl/config"
 	"github.com/neccohuang/goctl/rpc/parser"
 	"github.com/neccohuang/goctl/util"
 	"github.com/neccohuang/goctl/util/format"
 	"github.com/neccohuang/goctl/util/pathx"
 	"github.com/neccohuang/goctl/util/stringx"
+	"github.com/zeromicro/go-zero/core/collection"
 )
 
 const (
@@ -21,7 +21,7 @@ package server
 
 import (
 	{{if .notStream}}"context"{{end}}
-
+ 	{{if .check}}"google.golang.org/grpc/health/grpc_health_v1"{{end}}
 	{{.imports}}
 )
 
@@ -36,6 +36,18 @@ func New{{.server}}Server(svcCtx *svc.ServiceContext) *{{.server}}Server {
 	}
 }
 
+{{if .check}}
+func (s *TxPayServer) Check(ctx context.Context, req *grpc_health_v1.HealthCheckRequest) (*grpc_health_v1.HealthCheckResponse, error) {
+	return &grpc_health_v1.HealthCheckResponse{
+		Status: grpc_health_v1.HealthCheckResponse_SERVING,
+	}, nil
+}
+
+func (s *TxPayServer) Watch(req *grpc_health_v1.HealthCheckRequest, w grpc_health_v1.Health_WatchServer) error {
+	return nil
+}
+{{end}}
+
 {{.funcs}}
 `
 	functionTemplate = `
@@ -48,7 +60,7 @@ func (s *{{.server}}Server) {{.method}} ({{if .notStream}}ctx context.Context,{{
 )
 
 // GenServer generates rpc server file, which is an implementation of rpc server
-func (g *DefaultGenerator) GenServer(ctx DirContext, proto parser.Proto, cfg *conf.Config) error {
+func (g *DefaultGenerator) GenServer(ctx DirContext, proto parser.Proto, cfg *conf.Config, consul string) error {
 	dir := ctx.GetServer()
 	logicImport := fmt.Sprintf(`"%v"`, ctx.GetLogic().Package)
 	svcImport := fmt.Sprintf(`"%v"`, ctx.GetSvc().Package)
@@ -83,8 +95,15 @@ func (g *DefaultGenerator) GenServer(ctx DirContext, proto parser.Proto, cfg *co
 		}
 	}
 
+	var check string
+	if consul == "grpc" {
+		check = "grpc"
+	}
+
 	err = util.With("server").GoFmt(true).Parse(text).SaveTo(map[string]interface{}{
 		"head":                head,
+		"consul":              consul,
+		"check":               check,
 		"unimplementedServer": fmt.Sprintf("%s.Unimplemented%sServer", proto.PbPackage, stringx.From(service.Name).ToCamel()),
 		"server":              stringx.From(service.Name).ToCamel(),
 		"imports":             strings.Join(imports.KeysStr(), pathx.NL),

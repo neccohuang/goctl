@@ -558,6 +558,10 @@ var commands = []cli.Command{
 						Name:  "proto_path, I",
 						Usage: `native command of protoc, specify the directory in which to search for imports. [optional]`,
 					},
+					cli.StringFlag{
+						Name:  "consul",
+						Usage: "use consul with [ttl,grpc]",
+					},
 					cli.StringSliceFlag{
 						Name:  "go_opt",
 						Usage: `native command of protoc-gen-go, specify the mapping from proto to go, eg --go_opt=proto_import=go_package_import. [optional]`,
